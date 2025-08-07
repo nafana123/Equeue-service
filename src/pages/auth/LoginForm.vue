@@ -19,15 +19,18 @@ export default {
           password: this.password
         })
       });
-      if (!response.ok) throw new Error('Ошибка авторизации');
+
+      if (!response.ok || login != 'test') throw new Error('Ошибка авторизации');
       this.userData  = await response.json();
+      this.$router.push('/dashboard');     
     } catch (e) {
       this.error = e.message;
     }
   },
     async onDomainLoginClick() {
       try {
-        await fetch('http://localhost/api/domain-login', { method: 'POST' });
+        await fetch('http://localhost/api/domain-login', { 
+          method: 'POST' });
       } catch (e) {}
     }
   },
@@ -37,7 +40,7 @@ export default {
 }
 </script>
 
-<style src="@/assets/styles/auth.css"></style>
+<style src="@/assets/styles/auth/auth.css"></style>
 <template>
 <div class="container-wrapper">
   <div class="container">
